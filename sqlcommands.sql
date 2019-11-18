@@ -1,13 +1,13 @@
 -- 5 SQL Commands for Project Database & SQL
 
 -- INSERT
-INSERT INTO Groups VALUES('$gID', '$gName');
+INSERT INTO Groups VALUES( NULL, '$gName');
  -- creates a new group with a given name and a generated gID
 INSERT INTO Users VALUES('$username', '$email', '$password');
 -- adds a new user
 
 -- UPDATE
-UPDATE Groups Set gName = '$gName' WHERE gName = '$old_email';
+UPDATE Groups Set gName = '$gName' WHERE gName = '$old_gName';
 -- changes the groups name
 
 -- SELECT(s)
