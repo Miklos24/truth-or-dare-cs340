@@ -35,3 +35,25 @@ WHERE G.gName = "anotherRandomGroupName";
 -- Same as above but for truths
 
 -- And the two above where it doesnt matter what the group ID is.
+
+
+-- VIEW, TRIGGER, FUNCTION, or PROCEDURE
+
+-- This is a trigger from class example
+-- CREATE TRIGGER 'check_products' (IN cost Decimal(10,2), IN price Decimal(10,2))
+-- Begin
+--   IF cost < 0 THEN
+--     SIGNAL SQLSTATE'45000' -- SQLSTATE 45000s are error messages we can write our selves. Before that they are reserved
+--     SET message_text = 'check constraint on products.cost failed';
+--   END IF;
+--
+--   IF price < 0 THEN
+--     SIGNAL sqlstate '45001'
+--     SET message_text = 'check constraint on products.price failed';
+--   END IF;
+--
+--   IF price < cost THEN
+--     SIGNAL SQLSTATE '45002'
+--     SET Message_text = 'check constraint on products.price < products.cost';
+--   END IF;
+-- END;
