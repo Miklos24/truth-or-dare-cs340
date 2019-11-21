@@ -3,7 +3,8 @@
 -- INSERT
 -- INSERT INTO Groups VALUES( NULL, '$gName');
 -- creates a new group with a given name and a generated gID
--- INSERT INTO Users VALUES(@new_username, @new_email, @new_password);
+
+INSERT INTO Users VALUES("NEW USER", "NEW EMAIL", "NEW PASSWORD");
 -- adds a new user
 
 -- UPDATE
