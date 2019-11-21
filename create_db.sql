@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS TruthGroup (
 
 ALTER TABLE Groups
 	ADD CONSTRAINT FK_Groups_Users
-    FOREIGN KEY (owner) REFERENCES Users(username)
+    FOREIGN KEY (owner) REFERENCES Users(username);
 
 ALTER TABLE MemberOf
     ADD CONSTRAINT FK_MemberOf_Users
