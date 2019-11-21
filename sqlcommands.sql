@@ -1,13 +1,13 @@
 -- 5 SQL Commands for Project Database & SQL
 
 -- INSERT
-INSERT INTO Groups VALUES( NULL, '$gName');
- -- creates a new group with a given name and a generated gID
-INSERT INTO Users VALUES('$username', '$email', '$password');
+-- INSERT INTO Groups VALUES( NULL, '$gName');
+-- creates a new group with a given name and a generated gID
+-- INSERT INTO Users VALUES(@new_username, @new_email, @new_password);
 -- adds a new user
 
 -- UPDATE
-UPDATE Groups Set gName = '$gName' WHERE gName = '$old_gName';
+-- UPDATE Groups Set gName = '@gName' WHERE gName = '@old_gName';
 -- changes the groups name
 
 -- SELECT(s)
@@ -21,11 +21,6 @@ SELECT username, email
 FROM Users;
 -- returns all usersnames and emails of Users
 
-SELECT daretext, dare_pt_value, author
-FROM dareprompt
-NATURAL JOIN Dare-Group
-NATURAL JOIN Groups G
-WHERE G.gName = "anotherRandomGroupName";
 -- Select all dare prompts from a groups
 
 -- Select top 10 dare or truth prompts
