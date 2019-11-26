@@ -21,6 +21,51 @@
     <?php
       include 'header.php'; // this acts kinda like handlebars
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
+
+      $query = "SELECT txt, pts
+                FROM (
+                  SELECT dare_text AS txt, dare_pt_val AS pts
+                  FROM DarePrompts
+                  UNION
+                  SELECT truth_text AS txt, truth_pt_val AS pts
+                  FROM TruthPrompts
+                ) C
+                ORDER BY pts DESC
+                LIMIT 10
+                ";
+
+      $result = mysqli_query($conn, $query);
+      if(!$result) {
+        die("home page query failed");
+      }
+
+      if(mysqli_num_rows($result) > 0) {
+        echo "<h1>Top Truths or Dares</h1>";
+        echo "<table id='t01' border='1'>";
+        // Create the table header
+        echo "<thead>";
+          echo "<tr>";
+            echo "<th>Text</th>";
+            echo "<th>Points</th>";
+          echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
+      }
+
+      // Extract rows from the results returned from the database
+      while($row = mysqli_fetch_array($result)){
+          //  ADD code to display the parts  *****
+  		//  This is similar to how suppliers were displayed  ***
+				echo "<tr>";
+				echo "<td>" . $row['txt'] . "</td>";
+				echo "<td>" . $row['points'] . "</td>";
+				echo "</tr>";
+        }
+          echo "</tbody>";
+          echo "</table>";
+  		// Free result set
+          mysqli_free_result($result);
+
       mysqli_close($conn);
     ?>
 
