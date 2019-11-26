@@ -41,40 +41,42 @@
 
       if(mysqli_num_rows($result) > 0) {
         echo "<h1>Top Truths or Dares</h1>";
-        echo "<table id='t01' border='1'>";
-        // Create the table header
-        echo "<thead>";
-          echo "<tr>";
-            echo "<th>Text</th>";
-            echo "<th>Points</th>";
-          echo "</tr>";
-        echo "</thead>";
-        echo "<tbody>";
+        echo "<div class='container'>";
+          echo "<div class='TorD'>";
       }
 
-      // Extract rows from the results returned from the database
       while($row = mysqli_fetch_array($result)){
-          //  ADD code to display the parts  *****
-  		//  This is similar to how suppliers were displayed  ***
-				echo "<tr>";
-				echo "<td>" . $row['txt'] . "</td>";
-				echo "<td>" . $row['points'] . "</td>";
-				echo "</tr>";
+				    echo "<div id='TDtext'>";
+				        echo $row['txt'];
+            echo "</div>"; // end TDtext
+            echo "<div id='TDpoints'>";
+				        echo  $row['pts'];
+                echo "<button> ^ </button>";
+                echo "<button> v </button>";
+				    echo "</div>"; // end TDpoints
         }
-          echo "</tbody>";
-          echo "</table>";
-  		// Free result set
-          mysqli_free_result($result);
+          echo "</div>"; // end TorD
+         echo "</div>"; // end container
+
+        mysqli_free_result($result);
 
       mysqli_close($conn);
     ?>
 
 
-    <div class="container"> <!-- I do containers for flex boxes -->
-      <div>
-        This is the home screen
+    <!-- <div class="container">
+      <div class="TorD">
+        <div id="TDtext">
+          This is the home screen
+        </div>
+        <div id="TDpoints">
+          pts
+          <button> ^ </button>
+          <button> v </button>
+        </div>
       </div>
-    </div>
+    </div> -->
+
   </body>
 
 </html>
