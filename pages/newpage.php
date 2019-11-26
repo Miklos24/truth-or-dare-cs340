@@ -16,7 +16,7 @@
     <meta content="utf-8" http-equiv="encoding">
     <title> TITLE </title>
      <!-- Link for stuff like css -->
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../assets/index.css" media="screen">
 
     <!-- script for things like a javascript file. -->
     <!-- We may need a js file to test userinput and error handle. -->
