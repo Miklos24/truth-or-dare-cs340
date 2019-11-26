@@ -10,7 +10,7 @@
     <meta content="utf-8" http-equiv="encoding">
     <title> Truth or Dare! </title>
      <!-- Link for stuff like css -->
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../assets/index.css" media="screen">
 
     <!-- script for things like a javascript file. -->
     <!-- We may need a js file to test userinput and error handle. -->
@@ -19,7 +19,7 @@
   <body>
 
     <?php
-      include 'header.php'; // this acts kinda like handlebars
+      include 'header.php'; // this acts kinda like handlebars 
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
 
       $query = "SELECT txt, pts
@@ -40,20 +40,30 @@
       }
 
       if(mysqli_num_rows($result) > 0) {
-        echo "<h1>Top Truths or Dares</h1>";
+
         echo "<div class='container'>";
-          echo "<div class='TorD'>";
+
+        echo "<div class='TorD'>";
+        echo "<h1>Top Truths or Dares</h1>";
+
       }
 
       while($row = mysqli_fetch_array($result)){
-				    echo "<div id='TDtext'>";
-				        echo $row['txt'];
-            echo "</div>"; // end TDtext
-            echo "<div id='TDpoints'>";
-				        echo  $row['pts'];
-                echo "<button> ^ </button>";
-                echo "<button> v </button>";
-				    echo "</div>"; // end TDpoints
+            echo "<div class='singleTD'>";
+              echo "<div id='top'>";
+    				    echo "<div id='TDtext'>";
+    				        echo $row['txt'];
+                echo "</div>"; // end TDtext
+              echo "</div>"; //end top;
+              echo "<div id='bottom'>";
+                echo "<div id='TDpoints'>";
+    				        echo  $row['pts'];
+                    echo "<button> ^ </button>";
+                    echo "<button> v </button>";
+    				    echo "</div>"; // end TDpoints
+              echo "</div>"; //end bottom
+            echo "</div>"; //end singleTD
+
         }
           echo "</div>"; // end TorD
          echo "</div>"; // end container
