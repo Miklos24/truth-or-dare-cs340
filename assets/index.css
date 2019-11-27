@@ -1,0 +1,73 @@
+
+
+/* ****************** HEADER  ******************************* */
+header {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.navbar {
+  display: flex;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 5px;
+}
+
+/* ****************** END HEADER **************************** */
+
+/* ****************** CONTENT ******************************* */
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.TorD {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+}
+
+.singleTD {
+  width: 75%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 5px;
+}
+
+#top {
+  display: flex;
+  justify-content: left;
+}
+
+#TDtext {
+  margin: 10px;
+}
+
+#bottom {
+  display: flex;
+  justify-content: right;
+  background-color: lightgrey;
+  margin: 0px;
+  padding: 0px;
+}
+
+#TDpoints {
+  margin: 5px;
+}
+
+body {
+  background-image: ;
+  background-attachment: fixed;
+}

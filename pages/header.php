@@ -12,13 +12,15 @@
  ?>
 <header>
   Truth or Dare! [Header]
+  <div class='navbar'>
+    <nav>
+        <ul>
+          <?php
+            foreach ($navitem as $page => $location) {
+              echo "<li><a href='$location?user=".$user."' ".($page==$currentpage?" class='active'":"").">".$page."</a></li>";
+            }
+           ?>
+        </ul>
+    </nav>
+  </div>
 </header>
-<nav>
-  <ul>
-    <?php
-      foreach ($navitem as $page => $location) {
-        echo "<li><a href='$location?user=".$user."' ".($page==$currentpage?" class='active'":"").">".$page."</a></li>";
-      }
-     ?>
-  </ul>
-</nav>
