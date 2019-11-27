@@ -19,7 +19,7 @@
   <body>
 
     <?php
-      include 'header.php'; // this acts kinda like handlebars 
+      include 'header.php'; // this acts kinda like handlebars
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
 
       $query = "SELECT txt, pts
@@ -58,8 +58,8 @@
               echo "<div id='bottom'>";
                 echo "<div id='TDpoints'>";
     				        echo  $row['pts'];
-                    echo "<button> ^ </button>";
-                    echo "<button> v </button>";
+                    echo "<button> △ </button>";
+                    echo "<button> ▽ </button>";
     				    echo "</div>"; // end TDpoints
               echo "</div>"; //end bottom
             echo "</div>"; //end singleTD
