@@ -7,7 +7,8 @@
     // chmod 700 [filename.php]
     "Home" => "homepage.php",
     "Groups" => "groups.php",
-    "Template Page" => "newpage.php" // this should be taken out in the end product
+    "Template Page" => "newpage.php", // this should be taken out in the end product
+    "Login" => "signin.php"
   );
  ?>
 <header>
