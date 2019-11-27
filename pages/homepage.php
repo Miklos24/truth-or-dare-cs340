@@ -54,6 +54,7 @@
     				    echo "<div id='TDtext'>";
     				        echo $row['txt'];
                 echo "</div>"; // end TDtext
+                echo "<button id='side-arrow'> ▷ </button>";
               echo "</div>"; //end top;
               echo "<div id='bottom'>";
                 echo "<div id='TDpoints'>";
