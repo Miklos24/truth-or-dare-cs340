@@ -1,4 +1,5 @@
 <?php
+session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -10,24 +11,21 @@ $raw = file_get_contents("php://input");
 
 $json = json_decode($raw, true);
 
-$email = strval($json['email']); // TODO: error handling if this doesn't exist
+$username = strval($json['username']); // TODO: error handling if this doesn't exist
 $pass = strval($json['password']);
 
-if (!mb_check_encoding($email, "ASCII") || (!filter_var($email, FILTER_VALIDATE_EMAIL)))
-	die("email_not_registered");
 
 if (!mb_check_encoding($pass, "ASCII"))
 	die("invalid_password");
 
-$query = "SELECT * FROM Users WHERE email = '$json[email]'";
+$query = "SELECT * FROM Users WHERE username = '$json[username]'";
 
 if ($result = mysqli_query($conn, $query)) {
 	if ($result->num_rows == 0)
-		die("email_not_registered");
+		die("username_not_registered");
 	$row = mysqli_fetch_row($result);
 	if ($pass == $row[2]) {
-		session_start();
-		$_SESSION["username"] = $row[0];
+		$_SESSION["username"] = $row[0]; // TEST this once logout
 		echo "success";
 	} else {
 		die("invalid_password");
