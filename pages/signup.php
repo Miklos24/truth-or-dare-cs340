@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// If the user is already logged in, redirect them to the landing page. 
+if (isset($_SESSION['username'])) {
+    header("Location: homepage.php"); // TODO this is not working
+	die();
+}
+?>
 <html>
 <head>
 <title>Sign Up</title>
@@ -23,8 +32,8 @@ function valid() {
 		$("#username-err").css("visibility", "visible");
 		v = false;
 	} else {
-		$("input[name='name']").attr("class", "");
-		$("#name-err").css("visibility", "hidden");
+		$("input[name='username']").attr("class", "");
+		$("#username-err").css("visibility", "hidden");
 	}
 	if (!$("input[name='email']").val()) {
 		$("input[name='email']").addClass("invalid");
@@ -72,6 +81,10 @@ function handle(x) {
 			$("#username-err").html("Your username has unsupported characters");
 			$("#username-err").css("visibility", "visible");
 			break;
+		case "username_exists":
+			$("#username-err").html("Your username is already in use");
+			$("#username-err").css("visibility", "visible");
+			break;
 		case "invalid_email":
 			$("#email-err").html("Enter a valid email");
 			$("#email-err").css("visibility", "visible");
@@ -106,11 +119,12 @@ $("document").ready(function() { // have to do everything when the document is l
             url: "register.php", // TODO: Change this file
             data: JSON.stringify(dat),
             success: function(resp) {
+				console.log("Response:", resp)
 				var parsed = JSON.parse(resp);
-				console.log(parsed);
+				// console.log(parsed);
 				if (parsed == "success") {
 					hideErrors();
-					window.location.replace("https://web.engr.oregonstate.edu/~dapranod/truth-or-dare-cs340/pages/homepage.php");
+					window.location.replace("homepage.php");
 					return;
                 } else if (parsed == "error") {
                     alert("There was an error creating your account. Please try again later.");
@@ -234,8 +248,8 @@ body {
     <span id="flavor">Challenge your friends.</span>
         <div id="registration-panel">
         <form id="attempt-register">
-            <span style="font-size: 24px;">Register</span><br>
-            <span class="err" id="username-err">!</span><br>
+            <span style="font-size: 24px;">Sign Up</span><br>
+			<span class="err" id="username-err">!</span><br>
             <input type="text" name="username" placeholder="Username"><br>
             <span class="err" id="email-err">!</span><br>
             <input type="text" name="email" placeholder="Email Address"><br>

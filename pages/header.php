@@ -1,4 +1,23 @@
 <?php
+  session_start();
+  if (!isset($_SESSION['username'])) {
+    header("Location: signin.php");
+    die();
+  }
+  if(isset($_POST['logout'])){
+    logout();
+  }
+  function logout(){
+    unset($_SESSION["username"]);
+    echo '<script>',
+      'function logout(){',
+        'window.location.replace("signin.php");',
+      '}',
+     'logout();',
+     '</script>'
+    ;
+  }
+
   $user = $_GET['user'];
 
   $navitem = array(
@@ -21,7 +40,11 @@
               echo "<li><a href='$location?user=".$user."' ".($page==$currentpage?" class='active'":"").">".$page."</a></li>";
             }
            ?>
+           <form method="POST">
+             <input type="submit" name="logout" value="Logout" />
+           </form>
         </ul>
     </nav>
   </div>
 </header>
+

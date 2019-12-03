@@ -1,4 +1,6 @@
 <?php
+session_start(); // session started so that we can save global variables
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -14,8 +16,8 @@ $username = strval($json['username']);
 
 $pass = strval($json['password']);
 
-if (!ctype_alpha(str_replace(' ', '', $username)))
-    array_push($errors, "invalid_name");
+// if (!ctype_alpha(str_replace(' ', '', $username)))
+//     array_push($errors, "invalid_name");
 
 if (!mb_check_encoding($username, "ASCII"))
     array_push($errors, "unsupported_chars_name");
@@ -26,15 +28,25 @@ if (!mb_check_encoding($json['password'], "ASCII"))
 if (!filter_var($json['email'], FILTER_VALIDATE_EMAIL))
     array_push($errors, "invalid_email");
 
-$email_query = "SELECT * FROM Users WHERE Email = '$json[email]'";
+$email_query = "SELECT * FROM Users WHERE email = '$json[email]'";
 
-$result = 0; // TODO: make this better
+$resultEmail = 0;
 
-if (!($result = mysqli_query($conn, $email_query)))
+if (!($resultEmail = mysqli_query($conn, $email_query)))
     die(json_encode("error"));
 
-if ($result->num_rows != 0)
+if ($resultEmail->num_rows != 0)
     array_push($errors, "email_exists");
+
+$username_query = "SELECT * FROM Users WHERE username = '$json[username]'";
+
+$resultUser = 0;
+
+if (!($resultUser = mysqli_query($conn, $username_query)))
+    die(json_encode("error"));
+
+if ($resultUser->num_rows != 0)
+    array_push($errors, "username_exists");
 
 $raw_pass = strval($json['password']);
 
@@ -44,9 +56,12 @@ if (strlen($raw_pass) < 6) {
 
 if (sizeof($errors) == 0) {
     $sql = "INSERT INTO Users (username, email, password) VALUES ('$username', '$json[email]', '$json[password]')";
+    // $sql = "INSERT INTO Users (id, username, email, password) VALUES (NULL, '$username', '$json[email]', '$json[password]')";
     if (!mysqli_query($conn, $sql))
         die(json_encode("error"));
     echo json_encode("success");
+    $_SESSION["username"] = $username;
+
 } else {
     echo json_encode($errors);
 }

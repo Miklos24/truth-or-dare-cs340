@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// If the user is already logged in, redirect them to the landing page. 
+if (isset($_SESSION['username'])) {
+    header("Location: homepage.php"); // TODO this is not working
+	die();
+}
+?>
 <html>
 <head>
 <title>Login</title>
@@ -15,7 +24,8 @@ function handle(x) {
             $("#pass-err").html("Invalid password");
             $("#pass-err").css("visibility", "visible");
             break;
-        
+    }
+}
 
 $("document").ready(function() { // have to do everything when the document is loaded
     $("#login-button").on("click", function(e) {
@@ -35,9 +45,9 @@ $("document").ready(function() { // have to do everything when the document is l
             success: function(resp) {
                 console.log(resp);
                 if (resp == "success") {
-                    window.location.replace("https://web.engr.oregonstate.edu/~dapranod/truth-or-dare-cs340/pages/homepage.php");
-                } else if (resp == "email_not_logined") {
-                    err("That email is not valid");
+                    window.location.replace("homepage.php");
+                } else if (resp == "username_not_logined") {
+                    err("That username is not valid");
                 } else if (resp == "invalid_password") {
                     err("Invalid password");
                 } else {
@@ -163,10 +173,10 @@ body {
 <span id="flavor">Challenge your friends.</span>
 <div id="login-panel">
 <form id="attempt-login">
-    <span style="font-size: 24px;">Sign Up</span><br>
+    <span style="font-size: 24px;">Sign In</span><br>
     <!-- <span class="err" id="resp-err">!</span><br> -->
-    <span class="err" id="email-err">!</span><br>
-    <input type="text" name="email" placeholder="Email Address"><br>
+    <span class="err" id="username-err">!</span><br>
+    <input type="text" name="username" placeholder="Username"><br>
     <span class="err" id="pass-err">!</span><br>
     <input type="password" name="password" placeholder="Password"><br>
     <input type="submit" id="login-button"><br>

@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-
 <?php //this is how to signal that it is a php section
+  include 'header.php'; // this acts kinda like handlebars
   $currentpage="Home"; // $ signals a variable in php
 ?>
 
@@ -19,7 +18,6 @@
   <body>
 
     <?php
-      include 'header.php'; // this acts kinda like handlebars
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
 
       $query = "SELECT txt, pts
