@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// If the user is already logged in, redirect them to the landing page. 
+// If the user is already logged in, redirect them to the landing page.
 if (isset($_SESSION['username'])) {
     header("Location: homepage.php"); // TODO this is not working
 	die();
@@ -61,7 +61,7 @@ $("document").ready(function() { // have to do everything when the document is l
 </script>
 <style>
 body {
-	font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+	font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
     margin: 0;
     background-color: #192841;
 	background-image: linear-gradient(to top right, #3dc431, #192841);
@@ -179,7 +179,7 @@ body {
     <input type="text" name="username" placeholder="Username"><br>
     <span class="err" id="pass-err">!</span><br>
     <input type="password" name="password" placeholder="Password"><br>
-    <input type="submit" id="login-button"><br>
+    <input type="submit" id="login-button" value="Sign in"><br>
     <a href="signup.php">Don't have an account? Sign up</a>
 </form>
 </div>
