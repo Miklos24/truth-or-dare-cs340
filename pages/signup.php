@@ -27,7 +27,7 @@ function hideErrors() {
 function valid() {
 	v = true; // make false if any errors visible
 	if (!$("input[name='username']").val()) {
-		$("input[name='name']").attr("class", "invalid");
+		$("input[name='username']").addClass("invalid");
 		$("#username-err").html("Please enter your username");
 		$("#username-err").css("visibility", "visible");
 		v = false;
