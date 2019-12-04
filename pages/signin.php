@@ -17,6 +17,28 @@ function err(x) {
     $("#resp-err").html(x);
     $("#resp-err").css("visibility", "visible");
 }
+function valid() {
+	v = true; // make false if any errors visible
+	if (!$("input[name='username']").val()) {
+		$("input[name='username']").addClass("invalid");
+		$("#username-err").html("Please enter your username");
+		$("#username-err").css("visibility", "visible");
+		v = false;
+	} else {
+		$("input[name='username']").attr("class", "");
+		$("#username-err").css("visibility", "hidden");
+	}
+	if (!$("input[name='password']").val()) {
+		$("input[name='password']").addClass("invalid");
+		$("#pass-err").html("Please enter a password");
+		$("#pass-err").css("visibility", "visible");
+		v = false;
+	} else {
+		$("input[name='password']").attr("class", "");
+		$("#pass-err").css("visibility", "hidden");
+	}
+	return v;
+}
 
 function handle(x) {
 	switch (x.trim()) {
@@ -24,11 +46,17 @@ function handle(x) {
             $("#pass-err").html("Invalid password");
             $("#pass-err").css("visibility", "visible");
             break;
+        case "username_not_registered":
+            $("#username-err").html("Invalid Username");
+            $("#username-err").css("visibility", "visible");
     }
 }
 
 $("document").ready(function() { // have to do everything when the document is loaded
     $("#login-button").on("click", function(e) {
+
+    if (!valid())
+		return false;
 
     var form = $("#attempt-login");
 
@@ -46,12 +74,9 @@ $("document").ready(function() { // have to do everything when the document is l
                 console.log(resp);
                 if (resp == "success") {
                     window.location.replace("homepage.php");
-                } else if (resp == "username_not_logined") {
-                    err("That username is not valid");
-                } else if (resp == "invalid_password") {
-                    err("Invalid password");
-                } else {
-                    alert("An unknown error occurred");
+                }
+                else {
+                    handle(resp);
                 }
             }
         });
