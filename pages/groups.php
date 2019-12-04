@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <?php //this is how to signal that it is a php section
+  include 'header.php'; // this acts kinda like handlebars
   $currentpage="Groups"; // $ signals a variable in php
 ?>
 
@@ -18,7 +19,7 @@
   </head>
   <body>
     <?php
-      include 'header.php'; // this acts kinda like handlebars
+
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
 
       // example php
@@ -62,6 +63,5 @@
       mysqli_close($conn); //neccessary after connnectDB.php
     ?>
 
-    groups body
   </body>
 </html>
