@@ -7,6 +7,7 @@
 
 
 <?php //this is how to signal that it is a php section
+  include 'header.php'; // this acts kinda like handlebars
   $currentpage="Home"; // $ signals a variable in php
 ?>
 
@@ -25,17 +26,11 @@
   <body>
 
     <?php
-      include 'header.php'; // this acts kinda like handlebars
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
       mysqli_close($conn); // ends connection started in connectDB.php
     ?>
 
 
-    <div class="container"> <!-- I do containers for flex boxes -->
-      <div>
-        This is the body
-      </div>
-    </div>
   </body>
 
 </html>
