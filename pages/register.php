@@ -54,9 +54,14 @@ if (strlen($raw_pass) < 6) {
     array_push($errors, "pass_too_short");
 }
 
+// If there are no errors then add the user to the database.
 if (sizeof($errors) == 0) {
-    $sql = "INSERT INTO Users (username, email, password) VALUES ('$username', '$json[email]', '$json[password]')";
-    // $sql = "INSERT INTO Users (id, username, email, password) VALUES (NULL, '$username', '$json[email]', '$json[password]')";
+    $cstrong = 0;
+    $password  = $json['password'];
+    $bytes = openssl_random_pseudo_bytes(4, $cstrong); // generate a salt
+    $salt = bin2hex($bytes);
+    $passwordHashed = hash('sha256', "$password + $salt"); // add the salt to the password then use a hash function
+    $sql = "INSERT INTO Users (username, email, password, salt) VALUES ('$username', '$json[email]', '$passwordHashed', '$salt')";
     if (!mysqli_query($conn, $sql))
         die(json_encode("error"));
     echo json_encode("success");

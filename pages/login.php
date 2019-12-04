@@ -24,7 +24,9 @@ if ($result = mysqli_query($conn, $query)) {
 	if ($result->num_rows == 0)
 		die("username_not_registered");
 	$row = mysqli_fetch_row($result);
-	if ($pass == $row[2]) {
+	$salt = $row[3];
+	$passTry = hash('sha256', "$pass + $salt"); // create a new hash based on input pass
+	if ($passTry == $row[2]) {
 		$_SESSION["username"] = $row[0]; // TEST this once logout
 		echo "success";
 	} else {
