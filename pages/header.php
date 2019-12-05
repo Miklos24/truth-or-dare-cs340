@@ -34,18 +34,40 @@
  ?>
 <header>
   Truth or Dare! [Header]
-  <div class='navbar'>
-    <nav>
-        <ul>
+    <nav class="navbar navbar-expand-sm bg-light">
+        <ul class="navbar-nav">
           <?php
             foreach ($navitem as $page => $location) {
-              echo "<li><a href='$location?user=".$user."' ".($page==$currentpage?" class='active'":"").">".$page."</a></li>";
+              echo "<li class='nav-item'><a class='nav-link' href='$location?user=".$user."' ".($page==$currentpage?" class='active'":"").">".$page."</a></li>";
             }
            ?>
-           <form method="POST">
-             <input type="submit" name="logout" value="Logout" />
-           </form>
+           <li class="nav-item">
+             <form method="POST">
+               <input class="btn btn-link" type="submit" name="logout" value="Logout" />
+              </form>
+            </li>
+
         </ul>
     </nav>
-  </div>
 </header>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <title> Truth or Dare! </title>
+   <!-- Link for stuff like css -->
+  <!-- <link rel="stylesheet" href="../assets/index.css" media="screen"> -->
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+</head>
