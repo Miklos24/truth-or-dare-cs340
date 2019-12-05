@@ -55,7 +55,7 @@
                }
 
                while($row = mysqli_fetch_array($result)){
-                     echo "<div class='singleTD'>";
+                     echo "<div class='singleTD rounded'>";
                        echo "<div id='top'>";
              				    echo "<div id='TDtext'>";
              				        echo $row['dare_text'];

@@ -50,7 +50,7 @@
 
 		    // Extract rows from the results returned from the database
         while($row = mysqli_fetch_array($result)){
-          echo "<div class='singleTD'>";
+          echo "<div class='singleTD rounded'>";
             echo "<div id='top'>";
               echo "<div id='TDtext'>";
                   echo $row['gName'];
