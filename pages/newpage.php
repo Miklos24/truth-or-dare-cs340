@@ -8,7 +8,7 @@
 
 <?php //this is how to signal that it is a php section
   include 'header.php'; // this acts kinda like handlebars
-  $currentpage="Home"; // $ signals a variable in php
+  $currentpage="TO BE CHANGED"; // $ signals a variable in php
 ?>
 
 <html>
