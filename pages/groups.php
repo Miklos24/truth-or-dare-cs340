@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <?php //this is how to signal that it is a php section
+  include 'header.php'; // this acts kinda like handlebars
   $currentpage="Groups"; // $ signals a variable in php
 ?>
 
@@ -12,13 +13,22 @@
      <!-- Link for stuff like css -->
     <link rel="stylesheet" href="../assets/index.css" media="screen">
 
-    <!-- script for things like a javascript file. -->
-    <!-- We may need a js file to test userinput and error handle. -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 
   </head>
   <body>
     <?php
-      include 'header.php'; // this acts kinda like handlebars
+
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
 
       // example php
@@ -31,37 +41,36 @@
 
       if(mysqli_num_rows($result) > 0)
       {
-        echo "<h1>Groups</h1>";
-		    echo "<table id='t01' border='1'>";
-		// Create the table header
-        echo "<thead>";
-    			echo "<tr>";
-      			echo "<th>gID</th>";
-      			echo "<th>gName</th>";
-      			echo "<th>Owner</th>";
-    			echo "</tr>";
-        echo "</thead>";
-        echo "<tbody>";
+		    // Create the table header
+        echo "<div class='container'>";
+
+        echo "<div class='TorD'>";
+        echo "<h1>Groups</h1>";;
       }
 
-		// Extract rows from the results returned from the database
+		    // Extract rows from the results returned from the database
         while($row = mysqli_fetch_array($result)){
-        //  ADD code to display the parts  *****
-		//  This is similar to how suppliers were displayed  ***
-						echo "<tr>";
-						echo "<td>" . $row['gID'] . "</td>";
-				echo "<td>" . $row['gName'] . "</td>";
-						echo "<td>" . $row['owner'] . "</td>";
-						echo "</tr>";
-        }
-        echo "</tbody>";
-        echo "</table>";
+          echo "<div class='singleTD'>";
+            echo "<div id='top'>";
+              echo "<div id='TDtext'>";
+                  echo $row['gName'];
+              echo "</div>"; // end TDtext
+            echo "</div>"; //end top;
+            echo "<div id='bottom'>";
+              echo "<div id='TDpoints'>";
+                  echo  $row['owner'];
+              echo "</div>"; // end TDpoints
+            echo "</div>"; //end bottom
+          echo "</div>"; //end singleTD
+
+      }
+        echo "</div>"; // end TorD
+       echo "</div>"; // end container
 		// Free result set
         mysqli_free_result($result);
 
       mysqli_close($conn); //neccessary after connnectDB.php
     ?>
 
-    groups body
   </body>
 </html>

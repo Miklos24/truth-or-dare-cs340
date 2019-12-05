@@ -27,6 +27,8 @@
     "Home" => "homepage.php",
     "Groups" => "groups.php",
     "Template Page" => "newpage.php", // this should be taken out in the end product
+    "Groups Dares" => "GroupsDares.php", // this should probably not have a link but rather be something they switch to when a group is clicked on.
+    "Dare Responses" => "dareresponses.php",
     "Login" => "signin.php"
   );
  ?>
@@ -47,4 +49,3 @@
     </nav>
   </div>
 </header>
-
