@@ -67,6 +67,10 @@ li {
   margin: 5px;
 }
 
+#dareimage {
+  max-width: 100%;
+}
+
 body {
   background-image: ;
   background-attachment: fixed;
