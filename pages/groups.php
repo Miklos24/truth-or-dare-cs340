@@ -32,31 +32,31 @@
 
       if(mysqli_num_rows($result) > 0)
       {
-        echo "<h1>Groups</h1>";
-		    echo "<table id='t01' border='1'>";
-		// Create the table header
-        echo "<thead>";
-    			echo "<tr>";
-      			echo "<th>gID</th>";
-      			echo "<th>gName</th>";
-      			echo "<th>Owner</th>";
-    			echo "</tr>";
-        echo "</thead>";
-        echo "<tbody>";
+		    // Create the table header
+        echo "<div class='container'>";
+
+        echo "<div class='TorD'>";
+        echo "<h1>Groups</h1>";;
       }
 
-		// Extract rows from the results returned from the database
+		    // Extract rows from the results returned from the database
         while($row = mysqli_fetch_array($result)){
-        //  ADD code to display the parts  *****
-		//  This is similar to how suppliers were displayed  ***
-						echo "<tr>";
-						echo "<td>" . $row['gID'] . "</td>";
-				echo "<td>" . $row['gName'] . "</td>";
-						echo "<td>" . $row['owner'] . "</td>";
-						echo "</tr>";
-        }
-        echo "</tbody>";
-        echo "</table>";
+          echo "<div class='singleTD'>";
+            echo "<div id='top'>";
+              echo "<div id='TDtext'>";
+                  echo $row['gName'];
+              echo "</div>"; // end TDtext
+            echo "</div>"; //end top;
+            echo "<div id='bottom'>";
+              echo "<div id='TDpoints'>";
+                  echo  $row['owner'];
+              echo "</div>"; // end TDpoints
+            echo "</div>"; //end bottom
+          echo "</div>"; //end singleTD
+
+      }
+        echo "</div>"; // end TorD
+       echo "</div>"; // end container
 		// Free result set
         mysqli_free_result($result);
 
