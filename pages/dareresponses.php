@@ -60,7 +60,7 @@
             echo "<div class='singleTD'>";
               echo "<div id='top'>";
     				    echo "<div id='TDtext'>";
-    				        echo "<img id='dareimage' src=" . $row['pictureURL'] . ">";
+    				        echo "<img class='rounded' id='dareimage' src=" . $row['pictureURL'] . ">";
                 echo "</div>"; // end TDtext
               echo "</div>"; //end top;
               echo "<div id='bottom'>";
