@@ -33,7 +33,6 @@
   );
  ?>
 <header>
-  Truth or Dare! [Header]
     <nav class="navbar navbar-expand-sm bg-light">
         <ul class="navbar-nav">
           <?php
