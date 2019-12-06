@@ -6,6 +6,7 @@
 <html>
   <body>
 
+
     <?php
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
 
@@ -30,23 +31,22 @@
 
         echo "<div class='container'>";
 
-        echo "<div class='TorD'>";
+        echo "<div class='TorD' id='likebuttonID'>";
         echo "<h1>Top Truths or Dares</h1>";
 
       }
 
       while($row = mysqli_fetch_array($result)){
-            echo "<div class='singleTD rounded card'>";
-              echo "<div id='top'>";
+            echo "<div class='rounded card'>";
+              echo "<div class='card-body'>";
     				    echo "<div id='TDtext'>";
     				        echo $row['txt'];
                 echo "</div>"; // end TDtext
               echo "</div>"; //end top;
-              echo "<div id='bottom'>";
+              echo "<div class='card-footer'>";
                 echo "<div id='TDpoints'>";
     				        echo  $row['pts'];
-                    echo "<button> △ </button>";
-                    echo "<button> ▽ </button>";
+                    echo "<button class='btn btn-link likebutton' id='likebutton'> ☆ </button>";
     				    echo "</div>"; // end TDpoints
               echo "</div>"; //end bottom
             echo "</div>"; //end singleTD
@@ -59,6 +59,15 @@
 
       mysqli_close($conn);
     ?>
+
+    <script>
+      document.getElementById('likebuttonID').addEventListener('click', function(e) {
+        if(e.target && e.target.matches('button.likebutton')){
+          console.log("button pressed");
+          e.target.innerHTML = '★';
+        }
+      });
+    </script>
 
 
     <!-- <div class="container">
