@@ -10,16 +10,16 @@
     <?php
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
 
-      $darequery = "SELECT dID, dare_text, dare_pt_val
-                FROM DarePrompts
-                ORDER BY dare_pt_val DESC
-                LIMIT 10;
-               ";
+      $darequery = "SELECT dID, dare_pt_val, dare_text, author, gName
+                    FROM DarePrompts NATURAL JOIN DareGroup NATURAL JOIN Groups
+                    ORDER BY dare_pt_val DESC
+                    LIMIT 10;
+                   ";
 
-      $truthquery = "SELECT tID, truth_text, truth_pt_val
-                FROM TruthPrompts
-                ORDER BY truth_pt_val DESC
-                LIMIT 10;
+      $truthquery = "SELECT tID, truth_text, truth_pt_val, author, gName
+                      FROM TruthPrompts NATURAL JOIN TruthGroup NATURAL JOIN Groups
+                      ORDER BY truth_pt_val DESC
+                      LIMIT 10;
                 ";
 
       $dares = mysqli_query($conn, $darequery);
@@ -39,9 +39,11 @@
               echo "<div class='card rounded'>";
                 echo "<div id='card-body'>";
                     // echo $row['dare_text'];
-                    echo "<button class='btn btn-link textlink' id='textlink'>" . $row['dare_text'] . "</button>";
+                    echo "<a href='dareresponses.php?group=".$row['gName']."&dID=".$row['dID']."'>".$row['dare_text']."</a>";
                 echo "</div>";
                 echo "<div class=card-footer>";
+                  echo "<div>" . $row['author'] . "</div>";
+                  echo "<div>" . $row['gName'] . "</div>";
                   echo  $row['dare_pt_val']; // do we want a point value
                   echo "<button class='btn btn-link likebutton' id='likebutton'> ☆ </button>";
                 echo "</div>";
@@ -54,9 +56,11 @@
         while($row = mysqli_fetch_array($truths)){
           echo "<div class='card rounded'>";
             echo "<div id='card-body'>";
-                echo "<button class='btn btn-link textlink' id='textlink'>" . $row['truth_text'] . "</button>";
+                echo "<a href='truthresponses.php?group=".$row['gName']."&tID=".$row['tID']."'>".$row['truth_text']."</a>";
             echo "</div>"; //end top;
             echo "<div class=card-footer>";
+              echo "<div>" . $row['author'] . "</div>";
+              echo "<div>" . $row['gName'] . "</div>";
               echo  $row['truth_pt_val']; // do we want a point value
                echo "<button class='btn btn-link likebutton' id='likebutton'> ☆ </button>";
             echo "</div>";
@@ -78,9 +82,10 @@
           console.log("like button pressed");
           e.target.innerHTML = '★';
         }
-        if(e.target && e.target.matches('button.textlink')){
+        if(e.target && e.target.matches('button.dareextlink')){
           console.log("textlink button pressed");
-          e.target.innerHTML = 'pressed';
+          window.location.href = '';
+          // e.target.innerHTML = 'pressed';
         }
       });
     </script>
