@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
-<?php //this is how to signal that it is a php section
-  include 'header.php'; // this acts kinda like handlebars
-  $currentpage="Specific Group Dares"; // $ signals a variable in php
+<?php
+  /*
+  * This page shows the truths and the dare prompts for a specific group.
+  * This will use the url parameters in order to get the groupid for the page this is for.
+  * We will use a similar layout for the homepage where all of the top voted truths and dares are split up.
+  */
+  include 'header.php';
 ?>
 
 <html>
   <body>
-
     <?php
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
 

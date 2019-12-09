@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 
-<?php //this is how to signal that it is a php section
+<?php
+  /*
+  * This page shows all of the users groups and links to each groups 'grouppage'
+  * We will use url parameters in order to pass the group to the group page
+  */
   include 'header.php'; // this acts kinda like handlebars
-  $currentpage="Groups"; // $ signals a variable in php
+  $currentpage="groups"; // $ signals a variable in php
 ?>
 
 <html>
