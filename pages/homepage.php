@@ -38,16 +38,12 @@
 
       while($row = mysqli_fetch_array($result)){
             echo "<div class='rounded card'>";
-              echo "<div class='card-body'>";
-    				    echo "<div id='TDtext'>";
+              echo "<div class='card-body'>";;
     				        echo $row['txt'];
-                echo "</div>"; // end TDtext
               echo "</div>"; //end top;
               echo "<div class='card-footer'>";
-                echo "<div id='TDpoints'>";
     				        echo  $row['pts'];
                     echo "<button class='btn btn-link likebutton' id='likebutton'> ☆ </button>";
-    				    echo "</div>"; // end TDpoints
               echo "</div>"; //end bottom
             echo "</div>"; //end singleTD
 
