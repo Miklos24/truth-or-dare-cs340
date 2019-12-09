@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-
-
-
-<?php //this is how to signal that it is a php section
+<?php
+  /*
+  * This is where you can view all of the responses for a certain dare.
+  *
+  */
   include 'header.php'; // this acts kinda like handlebars
   $currentpage="Dare responses"; // $ signals a variable in php
 ?>
@@ -12,55 +13,43 @@
 
     <?php
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
+      
+      $gName = $_GET['group']; // this is gotten from the url parameters.
+      $dID = $_GET['dID'];
 
-      $gName = "OSU Boys";
-      $dID = 2;
+      $dareResponses = "SELECT picture_url, responder
+      FROM DareResponses R, DarePrompts P, Groups G
+      WHERE G.gID = R.gID AND P.dID = R.dID AND G.gName = ‘$gName’ AND P.dID = ‘$dID’";
 
-      $query = "SELECT pictureURL, upvotes
-                FROM DareResponses R, DarePrompts P, Groups G
-                WHERE G.gID = P.dID AND P.dID = R.dID AND G.gName = '$gName' AND P.dID = '$dID'
-               ";
+      $darePrompt = "SELECT dare_text FROM darePrompts WHERE dID = $dID";
 
-      $result = mysqli_query($conn, $query);
 
-      if(!$result) {
-        die("dare response query failed");
+      $dareResponses = mysqli_query($conn, $dareResponses);
+      $darePrompt = mysqli_query($conn, $darePrompt);
+      if(!$truthResponses || !$truthPrompt) {
+        die("response page query failed");
       }
 
-      if(mysqli_num_rows($result) > 0) {
+      echo "<div class='container'>";
 
-        echo "<div class='container'>";
-
-        echo "<div class='TorD'>";
-        echo "<h1>Dare responses</h1>";
-
+      echo "<h3>$darePrompt</h3>";
+      if(mysqli_num_rows($dareResponses) == 0) {
+        echo "There are not any responses to this dare yet";
       }
+      while($row = mysqli_fetch_array($dareResponses)){
+        echo "<div class='rounded card'>";
+            echo "<div class='card-body'>";;
+                echo "<img src='".$row['picture_url']."'/>";
+                echo  $row['responder'];
+            echo "</div>"; //end top;
+        echo "</div>"; 
+      }
+      echo "</div>";
+      mysqli_free_result($dareResponses);
+      mysqli_free_result($darePrompt);
 
-      while($row = mysqli_fetch_array($result)){
-            echo "<div class='card rounded'>";
-              echo "<div id='top'>";
-    				    echo "<div id='TDtext'>";
-    				        echo "<img class='rounded' id='dareimage' src=" . $row['pictureURL'] . ">";
-                echo "</div>"; // end TDtext
-              echo "</div>"; //end top;
-              echo "<div id='bottom'>";
-                echo "<div id='TDpoints'>";
-    				        echo  $row['upvotes'];
-                    echo "<button> △ </button>";
-                    echo "<button> ▽ </button>";
-    				    echo "</div>"; // end TDpoints
-              echo "</div>"; //end bottom
-            echo "</div>"; //end singleTD
-
-        }
-          echo "</div>"; // end TorD
-         echo "</div>"; // end container
-
-        mysqli_free_result($result);
-      mysqli_close($conn); // ends connection started in connectDB.php
+      mysqli_close($conn);
     ?>
-
-
   </body>
 
 </html>
