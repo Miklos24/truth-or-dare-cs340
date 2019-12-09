@@ -14,55 +14,68 @@
     <?php
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
 
-      $gName = 'OSU Boys'; // hard coded should be based off the website
+      $gName = $_GET['group']; // this is gotten from the url parameters.
 
-      $query = "SELECT dare_text, upvotes
+      $darequery = "SELECT dID, dare_text, dare_pt_val
                 FROM Groups G, (
 	                 DarePrompts
-                   NATURAL JOIN DareResponses)
-                WHERE G.gID = dID AND G.gName = '$gName'
+                   NATURAL JOIN DareGroup D)
+                WHERE G.gID = D.gID AND G.gName = '$gName'
                ";
 
-               $result = mysqli_query($conn, $query);
-               if(!$result) {
-                 die("group page query failed");
-               }
+      $truthquery = "SELECT tID, truth_text, truth_pt_val
+                FROM Groups G, (
+	                 TruthPrompts
+                   NATURAL JOIN TruthGroup T) 
+                WHERE G.gID = T.gID AND G.gName = '$gName'
+               ";
 
-               if(mysqli_num_rows($result) > 0) {
+      $dares = mysqli_query($conn, $darequery);
+      $truths = mysqli_query($conn, $truthquery);
+      if(!$truths || !$dares) {
+        die("group page query failed");
+      }
+      echo "<div class='container-fluid'>";
 
-                 echo "<div class='container'>";
+      echo "<h1>$gName</h1>";
+      echo "<div class='row'>"; // the container with both sides
+      echo "<div class='col-md-6 col-sm-6'>";  // container with the dares
+        echo "Groups Dares";
+      
+        while($row = mysqli_fetch_array($dares)){
+              echo "<div class='card rounded'>";
+                echo "<div id='card-body'>";
+                echo "<a href='dareresponses.php?group=".$row['gName']."&dID=".$row['dID']."'>".$row['dare_text']."</a>";
+                echo "</div>"; //end top;
+                echo "<div class=card-footer>";
+                  echo  $row['dare_pt_val']; // do we want a point value
+                echo "</div>";
+              echo "</div>"; 
+        }
+        echo "</div>";
 
-                 echo "<div class='TorD'>";
-                 echo "<h1>Group Dares</h1>";
+        echo "<div class='col-md-6 col-sm-6'>";  // right container with the truths
+        echo "Groups Truths";
+        while($row = mysqli_fetch_array($truths)){
+          echo "<div class='card rounded'>";
+            echo "<div id='card-body'>";
+                echo "<a href='truthresponses.php?group=".$row['gName']."&tID=".$row['tID']."'>".$row['truth_text']."</a>";
+            echo "</div>";
+            echo "<div class=card-footer>";
+              echo $row['truth_pt_val'];
+            echo "</div>";
+          echo "</div>"; 
+        }
+        echo "</div>";
 
-               }
+      echo "</div>"; // end row
+      echo "</div>"; // end container
 
-               while($row = mysqli_fetch_array($result)){
-                     echo "<div class='card rounded'>";
-                       echo "<div id='top'>";
-             				    echo "<div id='TDtext'>";
-             				        echo $row['dare_text'];
-                         echo "</div>"; // end TDtext
-                       echo "</div>"; //end top;
-                       echo "<div id='bottom'>";
-                         echo "<div id='TDpoints'>";
-             				        echo  $row['upvotes'];
-                             echo "<button> △ </button>";
-                             echo "<button> ▽ </button>";
-             				    echo "</div>"; // end TDpoints
-                       echo "</div>"; //end bottom
-                     echo "</div>"; //end singleTD
+      mysqli_free_result($dares);
+      mysqli_free_result($truths);
 
-                 }
-                   echo "</div>"; // end TorD
-                  echo "</div>"; // end container
-
-                 mysqli_free_result($result);
-
-                 mysqli_close($conn); // ends connection started in connectDB.php
+      mysqli_close($conn); // ends connection started in connectDB.php
     ?>
-
-
   </body>
 
 </html>

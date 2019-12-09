@@ -24,7 +24,7 @@
     // FOR NEW PAGES TO GET ADDED TO THE NAV BAR ADD THE FILE LIKE THIS
     // ALSO MAKE SURE THE FILE HAS 700 ACCCESS
     // chmod 700 [filename.php]
-    "My Groups" => "groups.php", // this should probably not have a link but rather be something they switch to when a group is clicked on.
+    "My Groups" => "usergroups.php", // this should probably not have a link but rather be something they switch to when a group is clicked on.
     "Search Groups" => "searchgroups.php", // change this to whatever you name the page Miklos
   );
  ?>

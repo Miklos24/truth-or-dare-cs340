@@ -10,55 +10,64 @@
     <?php
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
 
-      $query = "SELECT txt, pts
-                FROM (
-                  SELECT dare_text AS txt, dare_pt_val AS pts
-                  FROM DarePrompts
-                  UNION
-                  SELECT truth_text AS txt, truth_pt_val AS pts
-                  FROM TruthPrompts
-                ) C
-                ORDER BY pts DESC
-                LIMIT 10
-                ";
+      $darequery = "SELECT dID, dare_text, dare_pt_val
+                FROM DarePrompts
+                ORDER BY dare_pt_val DESC
+                LIMIT 10;
+               ";
 
-      $result = mysqli_query($conn, $query);
-      if(!$result) {
+      $truthquery = "SELECT tID, truth_text, truth_pt_val
+                FROM TruthPrompts
+                ORDER BY truth_pt_val DESC
+                LIMIT 10;
+                ";
+      
+      $dares = mysqli_query($conn, $darequery);
+      $truths = mysqli_query($conn, $truthquery);
+      if(!$dares || !$truths) {
         die("home page query failed");
       }
 
-      if(mysqli_num_rows($result) > 0) {
+      echo "<div class='container-fluid'>";
+      echo "<h1>Top Truths and Dares</h1>";
 
-        echo "<div class='container'>";
-
-        echo "<div class='TorD' id='likebuttonID'>";
-        echo "<h1>Top Truths or Dares</h1>";
-
-      }
-
-      while($row = mysqli_fetch_array($result)){
-            echo "<div class='rounded card'>";
-              echo "<div class='card-body'>";
-    				    echo "<div id='TDtext'>";
-    				        echo $row['txt'];
-                echo "</div>"; // end TDtext
-              echo "</div>"; //end top;
-              echo "<div class='card-footer'>";
-                echo "<div id='TDpoints'>";
-    				        echo  $row['pts'];
-                    echo "<button class='btn btn-link likebutton' id='likebutton'> ☆ </button>";
-    				    echo "</div>"; // end TDpoints
-              echo "</div>"; //end bottom
-            echo "</div>"; //end singleTD
-
+      echo "<div class='row'>"; // the container with both sides
+      echo "<div class='col-md-6 col-sm-6'>";  // container with the dares
+        echo "<h3>Groups Dares</h3>";
+      
+        while($row = mysqli_fetch_array($dares)){
+              echo "<div class='card rounded'>";
+                echo "<div id='card-body'>";
+                    echo $row['dare_text'];
+                echo "</div>";
+                echo "<div class=card-footer>";
+                  echo  $row['dare_pt_val']; // do we want a point value
+                echo "</div>";
+              echo "</div>"; 
         }
-          echo "</div>"; // end TorD
-         echo "</div>"; // end container
+        echo "</div>";
+
+        echo "<div class='col-md-6 col-sm-6'>";  // right container with the truths
+        echo "<h3>Groups Truths</h3>";
+        while($row = mysqli_fetch_array($truths)){
+          echo "<div class='card rounded'>";
+            echo "<div id='card-body'>";
+                echo $row['truth_text'];
+            echo "</div>"; //end top;
+            echo "<div class=card-footer>";
+              echo  $row['truth_pt_val']; // do we want a point value
+            echo "</div>";
+          echo "</div>"; 
+        }
+        echo "</div>";
+
+      echo "</div>"; // end row
 
         mysqli_free_result($result);
 
       mysqli_close($conn);
     ?>
+    
 
     <script>
       document.getElementById('likebuttonID').addEventListener('click', function(e) {
@@ -68,20 +77,6 @@
         }
       });
     </script>
-
-
-    <!-- <div class="container">
-      <div class="TorD">
-        <div id="TDtext">
-          This is the home screen
-        </div>
-        <div id="TDpoints">
-          pts
-          <button> ^ </button>
-          <button> v </button>
-        </div>
-      </div>
-    </div> -->
 
   </body>
 
