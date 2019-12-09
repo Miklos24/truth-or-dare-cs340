@@ -1,6 +1,6 @@
+/* 
 
-
-/* ****************** HEADER  ******************************* */
+****************** HEADER  *******************************
 header {
   width: 100%;
   margin: 0px;
@@ -27,6 +27,7 @@ li {
 /* ****************** END HEADER **************************** */
 
 /* ****************** CONTENT ******************************* */
+/*
 .container {
   display: flex;
   justify-content: center;
@@ -74,4 +75,4 @@ li {
 body {
   background-image: ;
   background-attachment: fixed;
-}
+} */

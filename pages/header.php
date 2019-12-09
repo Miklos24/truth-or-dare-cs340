@@ -24,29 +24,27 @@
     // FOR NEW PAGES TO GET ADDED TO THE NAV BAR ADD THE FILE LIKE THIS
     // ALSO MAKE SURE THE FILE HAS 700 ACCCESS
     // chmod 700 [filename.php]
-    "Home" => "homepage.php",
-    "Groups" => "groups.php",
-    "Template Page" => "newpage.php", // this should be taken out in the end product
-    "Groups Dares" => "GroupsDares.php", // this should probably not have a link but rather be something they switch to when a group is clicked on.
-    "Dare Responses" => "dareresponses.php",
-    "Login" => "signin.php"
+    "My Groups" => "GroupsDares.php", // this should probably not have a link but rather be something they switch to when a group is clicked on.
+    "Search Groups" => "searchgroups.php", // change this to whatever you name the page Miklos
   );
  ?>
 <header>
-    <nav class="navbar navbar-expand-sm bg-light">
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #192841; margin-bottom: 10px">
+      <div class="navbar-collapse">
         <ul class="navbar-nav">
+          <a class="navbar-brand" href="homepage.php">TRUTH or DARE</a>
           <?php
             foreach ($navitem as $page => $location) {
               echo "<li class='nav-item'><a class='nav-link' href='$location?user=".$user."' ".($page==$currentpage?" class='active'":"").">".$page."</a></li>";
             }
            ?>
-           <li class="nav-item">
-             <form method="POST">
-               <input class="btn btn-link" type="submit" name="logout" value="Logout" />
-              </form>
-            </li>
-
         </ul>
+      </div>
+      <div class="navbar-nav mr-auto">
+            <form class="my-lg-0" method="POST">
+              <input class="btn nav-link" type="submit" name="logout" value="Logout" />
+            </form>
+      </div>
     </nav>
 </header>
 <head>
