@@ -17,7 +17,7 @@
       $gName = $_GET['group']; // this is gotten from the url parameters.
 
       $darequery = "SELECT dID, dare_text, dare_pt_val
-                FROM Groups G, (
+                  FROM Groups G, (
 	                 DarePrompts
                    NATURAL JOIN DareGroup D)
                 WHERE G.gID = D.gID AND G.gName = '$gName'
@@ -26,7 +26,7 @@
       $truthquery = "SELECT tID, truth_text, truth_pt_val
                 FROM Groups G, (
 	                 TruthPrompts
-                   NATURAL JOIN TruthGroup T) 
+                   NATURAL JOIN TruthGroup T)
                 WHERE G.gID = T.gID AND G.gName = '$gName'
                ";
 
@@ -41,16 +41,16 @@
       echo "<div class='row'>"; // the container with both sides
       echo "<div class='col-md-6 col-sm-6'>";  // container with the dares
         echo "Groups Dares";
-      
+
         while($row = mysqli_fetch_array($dares)){
               echo "<div class='card rounded'>";
                 echo "<div id='card-body'>";
-                echo "<a href='dareresponses.php?group=".$row['gName']."&dID=".$row['dID']."'>".$row['dare_text']."</a>";
+                echo "<a href='dareresponses.php?group=".$gName."&dID=".$row['dID']."'>".$row['dare_text']."</a>";
                 echo "</div>"; //end top;
                 echo "<div class=card-footer>";
                   echo  $row['dare_pt_val']; // do we want a point value
                 echo "</div>";
-              echo "</div>"; 
+              echo "</div>";
         }
         echo "</div>";
 
@@ -59,12 +59,12 @@
         while($row = mysqli_fetch_array($truths)){
           echo "<div class='card rounded'>";
             echo "<div id='card-body'>";
-                echo "<a href='truthresponses.php?group=".$row['gName']."&tID=".$row['tID']."'>".$row['truth_text']."</a>";
+                echo "<a href='truthresponses.php?group=". $gName ."&tID=".$row['tID']."'>".$row['truth_text']."</a>";
             echo "</div>";
             echo "<div class=card-footer>";
               echo $row['truth_pt_val'];
             echo "</div>";
-          echo "</div>"; 
+          echo "</div>";
         }
         echo "</div>";
 
