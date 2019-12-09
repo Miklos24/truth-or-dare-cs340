@@ -17,9 +17,9 @@
       $gName = $_GET['group']; // this is gotten from the url parameters.
       $dID = $_GET['dID'];
 
-      $dareResponses = "SELECT pictureURL, responder, upvotes
-                        FROM DareResponses R, DarePrompts P, Groups G
-                        WHERE G.gID = P.dID AND P.dID = R.dID AND G.gName = '$gName' AND P.dID = $dID";
+      $dareResponses = "SELECT dID, responder, pictureURL, upvotes, gName
+                        FROM DareResponses NATURAL JOIN (DareGroup NATURAL JOIN Groups)
+                        WHERE gName = '$gName' AND dID = '$dID'";
 
       $darePrompt = "SELECT dare_text FROM DarePrompts WHERE dID = $dID";
 
