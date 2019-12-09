@@ -21,29 +21,31 @@
                 ORDER BY truth_pt_val DESC
                 LIMIT 10;
                 ";
-      
+
       $dares = mysqli_query($conn, $darequery);
       $truths = mysqli_query($conn, $truthquery);
       if(!$dares || !$truths) {
         die("home page query failed");
       }
 
-      echo "<div class='container-fluid'>";
+      echo "<div class='container-fluid' id='buttonID' >";
       echo "<h1>Top Truths and Dares</h1>";
 
       echo "<div class='row'>"; // the container with both sides
       echo "<div class='col-md-6 col-sm-6'>";  // container with the dares
         echo "<h3>Groups Dares</h3>";
-      
+
         while($row = mysqli_fetch_array($dares)){
               echo "<div class='card rounded'>";
                 echo "<div id='card-body'>";
-                    echo $row['dare_text'];
+                    // echo $row['dare_text'];
+                    echo "<button class='btn btn-link textlink' id='textlink'>" . $row['dare_text'] . "</button>";
                 echo "</div>";
                 echo "<div class=card-footer>";
                   echo  $row['dare_pt_val']; // do we want a point value
+                  echo "<button class='btn btn-link likebutton' id='likebutton'> ☆ </button>";
                 echo "</div>";
-              echo "</div>"; 
+              echo "</div>";
         }
         echo "</div>";
 
@@ -52,12 +54,13 @@
         while($row = mysqli_fetch_array($truths)){
           echo "<div class='card rounded'>";
             echo "<div id='card-body'>";
-                echo $row['truth_text'];
+                echo "<button class='btn btn-link textlink' id='textlink'>" . $row['truth_text'] . "</button>";
             echo "</div>"; //end top;
             echo "<div class=card-footer>";
               echo  $row['truth_pt_val']; // do we want a point value
+               echo "<button class='btn btn-link likebutton' id='likebutton'> ☆ </button>";
             echo "</div>";
-          echo "</div>"; 
+          echo "</div>";
         }
         echo "</div>";
 
@@ -67,13 +70,17 @@
 
       mysqli_close($conn);
     ?>
-    
+
 
     <script>
-      document.getElementById('likebuttonID').addEventListener('click', function(e) {
+      document.getElementById('buttonID').addEventListener('click', function(e) {
         if(e.target && e.target.matches('button.likebutton')){
-          console.log("button pressed");
+          console.log("like button pressed");
           e.target.innerHTML = '★';
+        }
+        if(e.target && e.target.matches('button.textlink')){
+          console.log("textlink button pressed");
+          e.target.innerHTML = 'pressed';
         }
       });
     </script>
