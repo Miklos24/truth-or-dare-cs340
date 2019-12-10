@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS Groups (
     gID int NOT NULL AUTO_INCREMENT,
     gName char(20) NOT NULL,
     owner char(20) NOT NULL,
+    numMembers int NOT NULL,
     PRIMARY KEY(gID)
 );
 
@@ -16,6 +17,7 @@ CREATE TABLE IF NOT EXISTS Users (
     username char(20) NOT NULL,
     email varchar(320) NOT NULL UNIQUE,
     password varchar(100) NOT NULL,
+    salt varchar(30) NOT NULL,
     PRIMARY KEY(username)
 );
 
@@ -23,6 +25,7 @@ CREATE TABLE IF NOT EXISTS DarePrompts (
     dID int NOT NULL AUTO_INCREMENT,
     dare_pt_val int DEFAULT 0,
     dare_text TINYTEXT NOT NULL,
+    num_responses int NOT NULL,
     author char(20) NOT NULL,
     PRIMARY KEY(dID)
 );
@@ -31,6 +34,7 @@ CREATE TABLE IF NOT EXISTS TruthPrompts (
     tID int NOT NULL AUTO_INCREMENT,
     truth_pt_val int DEFAULT 0,
     truth_text TINYTEXT NOT NULL,
+    num_responses int NOT NULL,
     author char(20) NOT NULL,
     PRIMARY KEY(tID)
 );
