@@ -41,11 +41,11 @@
                     // echo $row['dare_text'];
                     echo "<a href='dareresponses.php?group=".$row['gName']."&dID=".$row['dID']."'>".$row['dare_text']."</a>";
                 echo "</div>";
-                echo "<div class=card-footer>";
-                  echo "<div>" . $row['author'] . "</div>";
-                  echo "<div>" . $row['gName'] . "</div>";
-                  echo  $row['dare_pt_val']; // do we want a point value
-                  echo "<button class='btn btn-link likebutton' id='likebutton'> ☆ </button>";
+                echo "<div class='card-footer'>";
+                  echo "<div>" . $row['author'] . "\t-\t" . $row['gName'] . "\t" ;
+                    echo  $row['dare_pt_val']; // do we want a point value
+                    echo "<button class='btn btn-link likebutton' id='likebutton'> ☆ </button>";
+                  echo "</div>";
                 echo "</div>";
               echo "</div>";
         }
@@ -58,11 +58,11 @@
             echo "<div id='card-body'>";
                 echo "<a href='truthresponses.php?group=".$row['gName']."&tID=".$row['tID']."'>".$row['truth_text']."</a>";
             echo "</div>"; //end top;
-            echo "<div class=card-footer>";
-              echo "<div>" . $row['author'] . "</div>";
-              echo "<div>" . $row['gName'] . "</div>";
-              echo  $row['truth_pt_val']; // do we want a point value
-               echo "<button class='btn btn-link likebutton' id='likebutton'> ☆ </button>";
+            echo "<div class='card-footer'>";
+              echo "<div>" . $row['author'] . "\t-\t" . $row['gName'] . "\t" ;
+                echo  $row['truth_pt_val']; // do we want a point value
+                echo "<button class='btn btn-link likebutton' id='likebutton'> ☆ </button>";
+              echo "</div>";
             echo "</div>";
           echo "</div>";
         }
@@ -81,11 +81,8 @@
         if(e.target && e.target.matches('button.likebutton')){
           console.log("like button pressed");
           e.target.innerHTML = '★';
-        }
-        if(e.target && e.target.matches('button.dareextlink')){
-          console.log("textlink button pressed");
-          window.location.href = '';
-          // e.target.innerHTML = 'pressed';
+
+          
         }
       });
     </script>
