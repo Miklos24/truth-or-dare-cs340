@@ -39,7 +39,7 @@
               echo "<div class='card rounded'>";
                 echo "<div id='card-body'>";
                     // echo $row['dare_text'];
-                    echo "<a href='dareresponses.php?group=".$row['gName']."&dID=".$row['dID']."'>".$row['dare_text']."</a>";
+                    echo "<a class='nav-link' href='dareresponses.php?group=".$row['gName']."&dID=".$row['dID']."'>".$row['dare_text']."</a>";
                 echo "</div>";
                 echo "<div class='card-footer'>";
                   echo "<div>" . $row['author'] . "\t-\t" . $row['gName'] . "\t" ;
@@ -56,7 +56,7 @@
         while($row = mysqli_fetch_array($truths)){
           echo "<div class='card rounded'>";
             echo "<div id='card-body'>";
-                echo "<a href='truthresponses.php?group=".$row['gName']."&tID=".$row['tID']."'>".$row['truth_text']."</a>";
+                echo "<a class='nav-link' href='truthresponses.php?group=".$row['gName']."&tID=".$row['tID']."'>".$row['truth_text']."</a>";
             echo "</div>"; //end top;
             echo "<div class='card-footer'>";
               echo "<div>" . $row['author'] . "\t-\t" . $row['gName'] . "\t" ;
@@ -82,7 +82,7 @@
           console.log("like button pressed");
           e.target.innerHTML = '★';
 
-          
+
         }
       });
     </script>

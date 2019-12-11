@@ -45,7 +45,7 @@
         while($row = mysqli_fetch_array($dares)){
               echo "<div class='card rounded'>";
                 echo "<div id='card-body'>";
-                echo "<a href='dareresponses.php?group=".$gName."&dID=".$row['dID']."'>".$row['dare_text']."</a>";
+                echo "<a class='nav-link' href='dareresponses.php?group=".$gName."&dID=".$row['dID']."'>".$row['dare_text']."</a>";
                 echo "</div>"; //end top;
                 echo "<div class=card-footer>";
                   echo  $row['dare_pt_val']; // do we want a point value
@@ -59,7 +59,7 @@
         while($row = mysqli_fetch_array($truths)){
           echo "<div class='card rounded'>";
             echo "<div id='card-body'>";
-                echo "<a href='truthresponses.php?group=". $gName ."&tID=".$row['tID']."'>".$row['truth_text']."</a>";
+                echo "<a class='nav-link' href='truthresponses.php?group=". $gName ."&tID=".$row['tID']."'>".$row['truth_text']."</a>";
             echo "</div>";
             echo "<div class=card-footer>";
               echo $row['truth_pt_val'];
