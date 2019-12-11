@@ -1,55 +1,57 @@
--- 5 SQL Commands for Project Database & SQL
+--SQL Triggers
 
--- INSERT
--- INSERT INTO Groups VALUES( NULL, '$gName');
--- creates a new group with a given name and a generated gID
+--Triggers to increment group members when a group is joined.
+DELIMITER //
 
-INSERT INTO Users VALUES("NEW USER", "NEW EMAIL", "NEW PASSWORD");
--- adds a new user
+CREATE TRIGGER joinGroup 
+AFTER INSERT ON `MemberOf`
+FOR EACH ROW
+BEGIN
+UPDATE `Groups` G
+SET G.numMembers = G.numMembers + 1
+WHERE new.gID = G.gID;
+END //
 
--- UPDATE
--- UPDATE Groups Set gName = '@gName' WHERE gName = '@old_gName';
--- changes the groups name
+DELIMITER ;
 
--- SELECT(s)
-SELECT M.username
-From MemberOf M
-NATURAL JOIN Groups G
-WHERE G.gName = 'randomGroupName';
--- Gives usernames of users that are a memberOf 'randomGroupName'
+DELIMITER //
 
-SELECT username, email
-FROM Users;
--- returns all usersnames and emails of Users
+CREATE TRIGGER leaveGroup 
+AFTER DELETE ON `MemberOf`
+FOR EACH ROW
+BEGIN
+UPDATE `Groups` G
+SET G.numMembers = G.numMembers - 1
+WHERE old.gID = G.gID;
+END //
 
--- Select all dare prompts from a groups
+DELIMITER ;
 
--- Select top 10 dare or truth prompts
+--Trigger to increment the number of times a dare or truth was used
 
--- Select dare responses that corespond to a dareprompt and group ID
+DELIMITER //
 
--- Same as above but for truths
+CREATE TRIGGER truthResponse 
+AFTER INSERT ON `TruthResponses`
+FOR EACH ROW
+BEGIN
+UPDATE `TruthPrompts` T
+SET T.num_responses = T.num_responses + 1
+WHERE new.tID = T.tID;
+END //
 
--- And the two above where it doesnt matter what the group ID is.
+DELIMITER ;
 
 
--- VIEW, TRIGGER, FUNCTION, or PROCEDURE
+DELIMITER //
 
--- This is a trigger from class example
--- CREATE TRIGGER 'check_products' (IN cost Decimal(10,2), IN price Decimal(10,2))
--- Begin
---   IF cost < 0 THEN
---     SIGNAL SQLSTATE'45000' -- SQLSTATE 45000s are error messages we can write our selves. Before that they are reserved
---     SET message_text = 'check constraint on products.cost failed';
---   END IF;
---
---   IF price < 0 THEN
---     SIGNAL sqlstate '45001'
---     SET message_text = 'check constraint on products.price failed';
---   END IF;
---
---   IF price < cost THEN
---     SIGNAL SQLSTATE '45002'
---     SET Message_text = 'check constraint on products.price < products.cost';
---   END IF;
--- END;
+CREATE TRIGGER dareResponse 
+AFTER INSERT ON `DareResponses`
+FOR EACH ROW
+BEGIN
+UPDATE `DarePrompts`D
+SET D.num_responses = D.num_responses + 1
+WHERE new.dID = D.dID;
+END //
+
+DELIMITER ;
