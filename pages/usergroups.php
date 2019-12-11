@@ -13,7 +13,7 @@
   <body>
     <?php
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
-      
+
       $username = $_SESSION["username"];
       // example php
       $query = "SELECT G.gName, G.owner FROM Groups G, MemberOf M WHERE G.gID = M.gID AND '$username' = M.username"; //should change query for homepage
@@ -26,10 +26,10 @@
       echo "<div class='container'>";
 
       echo "<div class='TorD'>";
-      echo "<h1>Groups</h1>";
+      echo "<h1>" . $username . "'s Groups</h1>";
 
       if(mysqli_num_rows($result) == 0){ // if the user is not a member of a group.
-        echo "<div>You are not apart of any groups, explore the search groups tab to find one </div>";   
+        echo "<div>You are not apart of any groups, explore the search groups tab to find one </div>";
       }
 
 		    // Extract rows from the results returned from the database
@@ -43,9 +43,9 @@
             echo "</div>";
           echo "</div>";
       }
-      echo "</div>"; 
       echo "</div>";
-      
+      echo "</div>";
+
       // Free result set
       mysqli_free_result($result);
       mysqli_close($conn); //neccessary after connnectDB.php
