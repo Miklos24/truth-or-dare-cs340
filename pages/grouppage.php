@@ -43,9 +43,10 @@
         echo "Groups Dares";
 
         while($row = mysqli_fetch_array($dares)){
-              echo "<div class='card rounded'>";
+              echo "<div class='card rounded mt-2'>";
                 echo "<div id='card-body'>";
-                echo "<a class='nav-link' href='dareresponses.php?group=".$gName."&dID=".$row['dID']."'>".$row['dare_text']."</a>";
+                    echo "<a class='nav-link float-left' href='dareresponses.php?group=".$gName."&dID=".$row['dID']."'>".$row['dare_text']."</a>";
+                    echo "<a class='btn btn-outline-primary float-right m-2' href='darerespond.php?group=".$gName."&dID=".$row['dID']."'> Respond </a>";
                 echo "</div>"; //end top;
                 echo "<div class=card-footer>";
                   echo  $row['dare_pt_val']; // do we want a point value
@@ -57,9 +58,10 @@
         echo "<div class='col-md-6 col-sm-6'>";  // right container with the truths
         echo "Groups Truths";
         while($row = mysqli_fetch_array($truths)){
-          echo "<div class='card rounded'>";
+          echo "<div class='card rounded mt-2'>";
             echo "<div id='card-body'>";
-                echo "<a class='nav-link' href='truthresponses.php?group=". $gName ."&tID=".$row['tID']."'>".$row['truth_text']."</a>";
+                echo "<a class='nav-link float-left' href='truthresponses.php?group=". $gName ."&tID=".$row['tID']."'>".$row['truth_text']."</a>";
+                echo "<a class='btn btn-outline-primary float-right m-2' href='truthrespond.php?group=".$gName."&tID=".$row['tID']."'> Respond </a>";
             echo "</div>";
             echo "<div class=card-footer>";
               echo $row['truth_pt_val'];
