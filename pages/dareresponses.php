@@ -36,13 +36,15 @@
       $dare_text = mysqli_fetch_array($darePrompt);
 
       echo "<h3>" . $dare_text['dare_text'] . "</h3>";
+
       if(mysqli_num_rows($dareResponses) == 0) {
         echo "There are not any responses to this dare yet";
       }
       while($row = mysqli_fetch_array($dareResponses)){
         echo "<div class='rounded card m-2'>";
             echo "<div class='card-body'>";
-                echo "<img src='".$row['pictureURL']."'/>";
+                chmod($row['pictureURL'], 0755);
+                echo "<img class='img-fluid' src='".$row['pictureURL']."'/>";
             echo "</div>"; // end body
             echo "<div class=card-footer>";
                 echo  $row['responder'];

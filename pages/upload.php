@@ -63,13 +63,6 @@
               } else {
                   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                       echo "<p>The file ". basename( $_FILES["fileToUpload"]["name"]). " has been successfully submitted!</p>";
-                      $itworked = chmod($target_path, 0755);
-                      if ($itworked) {
-                          echo "<p>Yay it worked</p>";
-                      } else {
-                          echo "<p>It did not work.</p>";
-                      }
-
                   } else {
                       echo "<p>Sorry, there was an error uploading your file.</p>";
                   }
