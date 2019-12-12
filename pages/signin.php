@@ -69,8 +69,6 @@ $("document").ready(function() { // have to do everything when the document is l
 
     form.serializeArray().map(function(x){dat[x.name]=x.value;});
 
-    console.log(JSON.stringify(dat));
-
         $.ajax({
             type: "POST",
             url: "login.php",
