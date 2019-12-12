@@ -26,7 +26,7 @@
       echo "<div class='container'>";
 
       echo "<div class='TorD'>";
-      echo "<h1>" . $username . "'s Groups</h1>";
+      echo "<h1>" . $username . "s Groups</h1>";
 
       if(mysqli_num_rows($result) == 0){ // if the user is not a member of a group.
         echo "<div>You are not apart of any groups, explore the search groups tab to find one </div>";
