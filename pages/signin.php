@@ -47,8 +47,13 @@ function handle(x) {
             $("#pass-err").css("visibility", "visible");
             break;
         case "username_not_registered":
-            $("#username-err").html("Invalid Username");
+            $("#username-err").html("Username not registered");
             $("#username-err").css("visibility", "visible");
+            break;
+        case "invalid_username":
+            $("#username-err").html("Invalid username");
+            $("#username-err").css("visibility", "visible");
+            break;
     }
 }
 
@@ -56,15 +61,15 @@ $("document").ready(function() { // have to do everything when the document is l
     $("#login-button").on("click", function(e) {
 
     if (!valid())
-		return false;
+        return false;
 
     var form = $("#attempt-login");
 
-	var dat = {};
+    var dat = {};
 
-	form.serializeArray().map(function(x){dat[x.name]=x.value;});
+    form.serializeArray().map(function(x){dat[x.name]=x.value;});
 
-	console.log(JSON.stringify(dat));
+    console.log(JSON.stringify(dat));
 
         $.ajax({
             type: "POST",

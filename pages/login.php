@@ -14,6 +14,8 @@ $json = json_decode($raw, true);
 $username = strval($json['username']); // TODO: error handling if this doesn't exist
 $pass = strval($json['password']);
 
+if (!mb_check_encoding($username, "ASCII"))
+	die("invallid_username");
 
 if (!mb_check_encoding($pass, "ASCII"))
 	die("invalid_password");
