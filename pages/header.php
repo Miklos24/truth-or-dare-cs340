@@ -24,6 +24,13 @@
     mysqli_query($conn, $sql);
     mysqli_close($conn);
   }
+  function leavebutton($username, $gID) {
+    include 'connectDB.php';
+    unset($_POST['leave']);
+    $sql = "DELETE FROM MemberOf Where username = '$username' && gID = '$gID'";
+    mysqli_query($conn, $sql);
+    mysqli_close($conn);
+  }
 
   $user = $_GET['user'];
 
