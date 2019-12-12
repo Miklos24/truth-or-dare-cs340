@@ -58,17 +58,24 @@
 
               // Check if $uploadOk is set to 0 by an error
               if ($uploadOk == 0) {
-                  echo "Sorry, your file was not uploaded.";
+                echo "<script>";
+                echo "function emptyresponse() {";
+                echo "alert('Sorry, your file was not uploaded, make sure it exists');";
+                echo "window.location.replace('darerespond.php?group=".$gName."&dID=".$dID."');";
+                echo "}";
+                echo "emptyresponse()";
+                echo "</script>";
               // if everything is ok, try to upload file
               } else {
                   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                       echo "<p>The file ". basename( $_FILES["fileToUpload"]["name"]). " has been successfully uploaded!</p>";
+                      mysqli_query($conn, "INSERT INTO DareResponses (`dID`,`responder`,`pictureURL`,`upvotes`) VALUES ('$dID', '$username', '$target_file', 0)")
+                      or die ("You've already submitted a response to this query. Duplicate will not be submitted.");
                   } else {
                       echo "<p>Sorry, there was an error uploading your file.</p>";
                   }
               }
-              mysqli_query($conn, "INSERT INTO DareResponses (`dID`,`responder`,`pictureURL`,`upvotes`) VALUES ('$dID', '$username', '$target_file', 0)")
-              or die ("You've already submitted a response to this query. Duplicate will not be submitted.");
+
               echo "<a class='btn btn-primary' href='dareresponses.php?group=".$gName."&dID=".$dID."'>See All Responses</a>";
           echo "</div>";
       echo "</div>";
