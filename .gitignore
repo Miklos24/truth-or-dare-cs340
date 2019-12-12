@@ -1,1 +1,4 @@
 .DS_Store
+
+pages/sessions/*
+pages/uploads/*
