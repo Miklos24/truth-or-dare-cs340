@@ -58,7 +58,13 @@
 
               // Check if $uploadOk is set to 0 by an error
               if ($uploadOk == 0) {
-                  echo "Sorry, your file was not uploaded.";
+                echo "<script>";
+                echo "function emptyresponse() {";
+                echo "alert('Sorry, your file was not uploaded, make sure it exists');";
+                echo "window.location.replace('darerespond.php?group=".$gName."&dID=".$dID."');";
+                echo "}";
+                echo "emptyresponse()";
+                echo "</script>";
               // if everything is ok, try to upload file
               } else {
                   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
