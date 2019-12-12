@@ -56,6 +56,9 @@
                 while($buttonif = mysqli_fetch_array($buttonResult)){
                   if($buttonif['gName'] == $row['gName']){
                     echo "<input class='btn btn-outline-success' type='submit' name='leave' value='leave' />";
+                    if(isset($_POST['leave'])){
+                      leavebutton($username, $row['gID']);
+                    }
                     break;
                   }
                   else if($count == mysqli_num_rows($buttonResult)-1)
