@@ -22,14 +22,27 @@ include 'header.php'; // this acts kinda like handlebars ?>
                 echo "<hr class='my-4'>";
                 echo "<form method='post' action='submit.php?group=".$gName."&tID=".$tID."' class='form-group'>";
                     echo "<textarea class='form-control' id='truthTextResponse' rows=8 readonly>$submission_text</textarea>";
-                    if (mysqli_query($conn, "INSERT INTO TruthResponses (`tID`,`responder`,`response_text`,`upvotes`) VALUES ('$tID', '$username', '$submission_text', 0)")){
-                        echo "<button class='btn btn-primary btn-lg m-2' disabled>Submitted!</button>";
-                        echo "<a class='btn btn-primary btn-lg' href='truthresponses.php?group=".$gName."&tID=".$tID."'>See All Responses</a>";
-                    } else {
-                        echo "<button class='btn btn-primary btn-lg m-2' disabled>Submission Failed!</button>";
-                        echo "<a class='btn btn-primary btn-lg' href='truthresponses.php?group=".$gName."&tID=".$tID."'>See All Responses</a>";
-                        echo "<p>You've already submitted a response to this prompt. </p>";
+                    if($submission_text != "") {
+                      if (mysqli_query($conn, "INSERT INTO TruthResponses (`tID`,`responder`,`response_text`,`upvotes`) VALUES ('$tID', '$username', '$submission_text', 0)")){
+                          echo "<button class='btn btn-primary btn-lg m-2' disabled>Submitted!</button>";
+                          echo "<a class='btn btn-primary btn-lg' href='truthresponses.php?group=".$gName."&tID=".$tID."'>See All Responses</a>";
+                      } else {
+                          echo "<button class='btn btn-primary btn-lg m-2' disabled>Submission Failed!</button>";
+                          echo "<a class='btn btn-primary btn-lg' href='truthresponses.php?group=".$gName."&tID=".$tID."'>See All Responses</a>";
+                          echo "<p>You've already submitted a response to this prompt. </p>";
+                      }
                     }
+                    else {
+                      echo "<script>";
+
+                      echo "function emptyresponse() {";
+                      echo "alert('can not have an empty response');";
+                      echo "window.location.replace('truthrespond.php?group=".$gName."&tID=".$tID."');";
+                      echo "}";
+                      echo "emptyresponse()";
+                      echo "</script>";
+                    }
+
                 echo "</form";
             echo "</div>";
         echo "</div>";
