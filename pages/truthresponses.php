@@ -35,7 +35,7 @@
 
       echo "<h3>" . $truth_prompt['truth_text'] . "</h3>";
       if(mysqli_num_rows($truthResponses) == 0) {
-        echo "There are not any responses to this dare yet";
+        echo "There are not any responses to this truth prompt yet";
       }
       while($row = mysqli_fetch_array($truthResponses)){
         echo "<div class='rounded card'>";

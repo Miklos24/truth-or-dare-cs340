@@ -13,6 +13,7 @@ include 'header.php'; // this acts kinda like handlebars ?>
         $truthquery = "SELECT truth_text FROM TruthPrompts WHERE tID = '$tID' ";
 
         $truth_text = mysqli_query($conn, $truthquery)->fetch_array()[0];
+        $submission_text = mysqli_real_escape_string($conn, $_POST['truthTextResponse']);
 
         echo "<div class='container-fluid'>";
             echo "<div class='jumbotron'>";
@@ -20,13 +21,17 @@ include 'header.php'; // this acts kinda like handlebars ?>
                 echo "<p class='lead'> Answer this truth in the textbox below!</p>";
                 echo "<hr class='my-4'>";
                 echo "<form method='post' action='submit.php?group=".$gName."&tID=".$tID."' class='form-group'>";
-                    echo "<textarea class='form-control' name='truthTextResponse' rows=8></textarea>";
-                    echo "<input type='submit' value='Submit Response' class='btn btn-primary btn-lg m-2'/>";
+                    echo "<textarea class='form-control' id='truthTextResponse' rows=8 readonly>$submission_text</textarea>";
+                    echo "<button class='btn btn-primary btn-lg m-2' disabled>Submitted!</button>";
+                    echo "<a class='btn btn-primary btn-lg' href='truthresponses.php?group=".$gName."&tID=".$tID."'>See All Responses</a>";
                 echo "</form";
             echo "</div>";
         echo "</div>";
 
-        mysqli_free_result($dare_text);
+        mysqli_query($conn, "INSERT INTO TruthResponses (`tID`,`responder`,`response_text`,`upvotes`) VALUES ('$tID', '$username', '$submission_text', 0)")
+        or die (mysqli_error($conn));
+
+        mysqli_free_result($truth_text);
         mysqli_close($conn); // ends connection started in connectDB.php
     ?>
 

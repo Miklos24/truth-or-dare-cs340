@@ -36,7 +36,7 @@
         echo "<h3>Groups Dares</h3>";
 
         while($row = mysqli_fetch_array($dares)){
-              echo "<div class='card rounded'>";
+              echo "<div class='card rounded mt-2'>";
                 echo "<div id='card-body'>";
                     // echo $row['dare_text'];
                     echo "<a class='nav-link' href='dareresponses.php?group=".$row['gName']."&dID=".$row['dID']."'>".$row['dare_text']."</a>";
@@ -54,7 +54,7 @@
         echo "<div class='col-md-6 col-sm-6'>";  // right container with the truths
         echo "<h3>Groups Truths</h3>";
         while($row = mysqli_fetch_array($truths)){
-          echo "<div class='card rounded'>";
+          echo "<div class='card rounded mt-2'>";
             echo "<div id='card-body'>";
                 echo "<a class='nav-link' href='truthresponses.php?group=".$row['gName']."&tID=".$row['tID']."'>".$row['truth_text']."</a>";
             echo "</div>"; //end top;
