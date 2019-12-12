@@ -56,22 +56,24 @@
                 while($buttonif = mysqli_fetch_array($buttonResult)){
                   if($buttonif['gName'] == $row['gName']){
                     echo "<input class='btn btn-outline-success' type='submit' name='leave' value='leave' />";
+                    $count = 1;
                     if(isset($_POST['leave'])){
                       leavebutton($username, $row['gID']);
                     }
                     break;
                   }
-                  else if($count == mysqli_num_rows($buttonResult)-1)
+                }
+
+                  if($count == 0)
                   {
                     echo "<input class='btn btn-outline-primary' type='submit' name='join' value='join'/>";
                     if(isset($_POST['join'])){
                       joinbutton($username, $row['gID']);
                     }
-                    break;
                   }
-                  $count++;
-                }
-                $count = 0;
+                  
+
+
 
 echo "</form>";
           echo "</div>";
