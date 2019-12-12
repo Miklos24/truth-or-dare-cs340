@@ -61,6 +61,9 @@
                   else if($count == mysqli_num_rows($buttonResult)-1)
                   {
                     echo "<input class='btn btn-outline-primary' type='submit' name='join' value='join'/>";
+                    if(isset($_POST['join'])){
+                      joinbutton($username, $row['gID']);
+                    }
                     break;
                   }
                   $count++;
