@@ -22,7 +22,7 @@ include 'header.php'; // this acts kinda like handlebars ?>
                 echo "<hr class='my-4'>";
                 echo "<form method='post' action='submit.php?group=".$gName."&tID=".$tID."' class='form-group'>";
                     echo "<textarea class='form-control' id='truthTextResponse' rows=8 readonly>$submission_text</textarea>";
-                    if($submission_text != "") {
+                    if( trim ( " \t\n\r\0\x0B", $submission_text, "  \t\n\r\0\x0B")  != "") {
                       if (mysqli_query($conn, "INSERT INTO TruthResponses (`tID`,`responder`,`response_text`,`upvotes`) VALUES ('$tID', '$username', '$submission_text', 0)")){
                           echo "<button class='btn btn-primary btn-lg m-2' disabled>Submitted!</button>";
                           echo "<a class='btn btn-primary btn-lg' href='truthresponses.php?group=".$gName."&tID=".$tID."'>See All Responses</a>";
