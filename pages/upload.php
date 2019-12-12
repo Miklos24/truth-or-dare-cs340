@@ -62,17 +62,16 @@
               // if everything is ok, try to upload file
               } else {
                   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                      echo "<p>The file ". basename( $_FILES["fileToUpload"]["name"]). " has been successfully submitted!</p>";
+                      echo "<p>The file ". basename( $_FILES["fileToUpload"]["name"]). " has been successfully uploaded!</p>";
                   } else {
                       echo "<p>Sorry, there was an error uploading your file.</p>";
                   }
               }
+              mysqli_query($conn, "INSERT INTO DareResponses (`dID`,`responder`,`pictureURL`,`upvotes`) VALUES ('$dID', '$username', '$target_file', 0)")
+              or die ("You've already submitted a response to this query. Duplicate will not be submitted.");
               echo "<a class='btn btn-primary' href='dareresponses.php?group=".$gName."&dID=".$dID."'>See All Responses</a>";
           echo "</div>";
       echo "</div>";
-
-      mysqli_query($conn, "INSERT INTO DareResponses (`dID`,`responder`,`pictureURL`,`upvotes`) VALUES ('$dID', '$username', '$target_file', 0)")
-      or die (mysqli_error($conn));
 
       mysqli_free_result($dare_text);
       mysqli_close($conn);
