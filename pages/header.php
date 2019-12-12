@@ -17,6 +17,13 @@
      '</script>'
     ;
   }
+  function joinbutton($username, $gID) {
+    include 'connectDB.php';
+    unset($_POST['join']);
+    $sql = "INSERT INTO MemberOf (username, gID, num_pts) VALUES ('$username', '$gID', '0')";
+    mysqli_query($conn, $sql);
+    mysqli_close($conn);
+  }
 
   $user = $_GET['user'];
 
