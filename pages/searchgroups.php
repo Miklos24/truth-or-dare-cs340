@@ -84,7 +84,7 @@
         console.log(data)
         $.ajax({
             type: "POST",
-            url: "join.php",
+            url: "joinleave.php",
             data: JSON.stringify(data),
             success: function(resp) {
                 if (resp == "success") {
@@ -102,12 +102,12 @@
         console.log(data)
         $.ajax({
             type: "POST",
-            url: "join.php",
+            url: "joinleave.php",
             data: JSON.stringify(data),
             success: function(resp) {
                 if (resp != "failure") {
                     gName = resp;
-                    window.location.replace('grouppage.php?group="' + gName + '"');
+                    window.location.replace('grouppage.php?group=' + gName);
                 }
                 else {
                     console.log("error joining group, try again later")
