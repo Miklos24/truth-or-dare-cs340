@@ -40,7 +40,7 @@
         echo "There are not any responses to this dare yet";
       }
       while($row = mysqli_fetch_array($dareResponses)){
-        echo "<div class='rounded card'>";
+        echo "<div class='rounded card m-2'>";
             echo "<div class='card-body'>";
                 echo "<img src='".$row['pictureURL']."'/>";
             echo "</div>"; // end body

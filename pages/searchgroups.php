@@ -38,7 +38,7 @@
       $partOfGroup = "SELECT G.gName, G.owner, G.gID FROM Groups G, MemberOf M WHERE G.gID = M.gID AND '$username' = M.username";
 
       while($row = mysqli_fetch_array($result)) { // loop through and display all of the group info
-        echo "<div class='card rounded'>";
+        echo "<div class='card rounded m-2'>";
           echo "<div class='card-body'>";
             echo "<a class='nav-link' href='grouppage.php?group=".$row['gName']."'>".$row['gName']."</a>";
             echo "<div>" .$row['numMembers'] . " Members </div>" ;
@@ -64,7 +64,7 @@
         if($count != 1){ // if there user is not in the group
           echo "<button class='btn btn-outline-primary float-right' onClick='join(\"" . $username . "\"," . $row['gID'] . ",\"" . $row['gName'] . "\")'>Join</button>";
         }
-      
+
         echo "</div>";
         echo "</div>";
         mysqli_free_result($buttonResult);
@@ -76,7 +76,7 @@
 
       mysqli_close($conn); // ends connection started in connectDB.php
     ?>
-    
+
     <script>
       function leave(username, gID, gName){
         console.log(username, gID, gName);

@@ -38,7 +38,7 @@
         echo "There are not any responses to this truth prompt yet";
       }
       while($row = mysqli_fetch_array($truthResponses)){
-        echo "<div class='rounded card'>";
+        echo "<div class='rounded card m-2'>";
             echo "<div class='card-body'>";;
                 echo $row['response_text'];
             echo "</div>"; //end body

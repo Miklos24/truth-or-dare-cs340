@@ -34,7 +34,7 @@
 
 		    // Extract rows from the results returned from the database
         while($row = mysqli_fetch_array($result)){
-          echo "<div class='card rounded'>";
+          echo "<div class='card rounded m-2'>";
             echo "<div class='card-body'>";
               echo "<a class='nav-link' href='grouppage.php?group=".$row['gName']."'>".$row['gName']."</a>";
             echo "</div>"; //end top;
