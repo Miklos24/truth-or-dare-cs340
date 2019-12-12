@@ -41,7 +41,7 @@
         echo "<div class='card rounded m-2'>";
           echo "<div class='card-body'>";
             echo "<a class='nav-link' href='grouppage.php?group=".$row['gName']."'>".$row['gName']."</a>";
-            echo "<div>" .$row['numMembers'] . " Members </div>" ;
+            echo "<div class='float-right'>" .$row['numMembers'] . " Members </div>" ;
           echo "</div>"; //end top;
         echo "<div class=card-footer>";
 
@@ -107,7 +107,7 @@
             success: function(resp) {
                 if (resp != "failure") {
                     gName = resp;
-                    window.location.replace('grouppage.php?group=' + gName);
+                    window.location.replace('searchgroups.php');
                 }
                 else {
                     console.log("error joining group, try again later")

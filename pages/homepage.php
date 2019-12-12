@@ -10,15 +10,15 @@
     <?php
       include 'connectDB.php'; // has $conn=mysqli_connect(...) in it needs, mysqli_close() to end connection
 
-      $darequery = "SELECT dID, dare_pt_val, dare_text, author, gName
+      $darequery = "SELECT dID, num_responses, dare_text, author, gName
                     FROM DarePrompts NATURAL JOIN DareGroup NATURAL JOIN Groups
-                    ORDER BY dare_pt_val DESC
+                    ORDER BY num_responses DESC
                     LIMIT 10;
                    ";
 
-      $truthquery = "SELECT tID, truth_text, truth_pt_val, author, gName
+      $truthquery = "SELECT tID, truth_text, num_responses, author, gName
                       FROM TruthPrompts NATURAL JOIN TruthGroup NATURAL JOIN Groups
-                      ORDER BY truth_pt_val DESC
+                      ORDER BY num_responses DESC
                       LIMIT 10;
                 ";
 
@@ -42,10 +42,8 @@
                     echo "<a class='nav-link' href='dareresponses.php?group=".$row['gName']."&dID=".$row['dID']."'>".$row['dare_text']."</a>";
                 echo "</div>";
                 echo "<div class='card-footer'>";
-                  echo "<div>" . $row['author'] . "\t-\t" . $row['gName'] . "\t" ;
-                    echo  $row['dare_pt_val']; // do we want a point value
-                    echo "<button class='btn btn-link likebutton' id='likebutton'> ☆ </button>";
-                  echo "</div>";
+                  echo $row['author'] . "\t-\t" . $row['gName'] . "\t" ;
+                  echo "<div class='float-right'>" . $row['num_responses'] . " Resonses</div>"; 
                 echo "</div>";
               echo "</div>";
         }
@@ -59,10 +57,8 @@
                 echo "<a class='nav-link' href='truthresponses.php?group=".$row['gName']."&tID=".$row['tID']."'>".$row['truth_text']."</a>";
             echo "</div>"; //end top;
             echo "<div class='card-footer'>";
-              echo "<div>" . $row['author'] . "\t-\t" . $row['gName'] . "\t" ;
-                echo  $row['truth_pt_val']; // do we want a point value
-                echo "<button class='btn btn-link likebutton' id='likebutton'> ☆ </button>";
-              echo "</div>";
+              echo $row['author'] . "\t-\t" . $row['gName'] . "\t";
+                echo "<div class='float-right'>" . $row['num_responses'] . " Resonses</div>"; // do we want a point value
             echo "</div>";
           echo "</div>";
         }
