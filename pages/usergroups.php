@@ -42,21 +42,15 @@
               echo "Group admin: " . $row['owner'];
               $partOfGroup = "SELECT G.gName, G.owner, G.gID FROM Groups G, MemberOf M WHERE G.gID = M.gID AND '$username' = M.username";
               $buttonResult = mysqli_query($conn, $partOfGroup);
-              $count = 0;
               while($buttonif = mysqli_fetch_array($buttonResult)){
                 if($buttonif['gName'] == $row['gName'] && $buttonif['owner'] == $username){ // can not leave a group
                   echo "<button class='btn btn-outline-dark disabled float-right'>Leave</button>";
-                  $count = 1;
                   break;
                 }
                 else if($buttonif['gName'] == $row['gName']){ // non working button if owner
                   echo "<button class='btn btn-outline-danger float-right' onClick='leave(\"" . $username . "\"," . $row['gID'] . ",\"" . $row['gName'] . "\")'>Leave</button>";
-                  $count = 1;
                   break;
                 }
-              }
-              if($count != 1){ // if there user is not in the group
-                echo "<button class='btn btn-outline-primary float-right' onClick='join(\"" . $username . "\"," . $row['gID'] . ",\"" . $row['gName'] . "\")'>Join</button>";
               }
             echo "</div>";
           echo "</div>";
@@ -83,25 +77,6 @@
                 }
                 else {
                     console.log("error leaving group, try again later");
-                }
-            }
-        });
-      }
-      function join(username, gID, gName){
-        console.log(username, gID, gName);
-        data = { "username": username, "gID": gID, "gName": gName, "type": "join" }
-        console.log(data)
-        $.ajax({
-            type: "POST",
-            url: "joinleave.php",
-            data: JSON.stringify(data),
-            success: function(resp) {
-                if (resp != "failure") {
-                    gName = resp;
-                    window.location.replace('grouppage.php?group=' + gName);
-                }
-                else {
-                    console.log("error joining group, try again later")
                 }
             }
         });
