@@ -1,6 +1,3 @@
 # truth-or-dare-cs340
 
-This is a test to see if I can push from public html on the engr server.
-This is me testing to see if I too can push from master from public html on engr server.
-
-This is me testing to see if I can push from a branch on public html on engr server
+This application allows users to complete challenges in a classic “truth or dare” format. Users will make an account, and then will gain points based on the challenges that they have done. “Dares” will consist of real life challenges which can be verified by providing a picture of the completion of the dare, while “truths” will be writing challenges, answering a particular question that is posed in a comprehensive manner. In addition, users may also join “friend groups” to participate in small scale “truth or dare” competitions. Each group will be administered by a single user. The most responded-to truths and dares will be displayed on the front page of the website so that users may see or contribute to the most popular ones.
